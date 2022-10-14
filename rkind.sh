@@ -10,7 +10,7 @@ RANCHER_CONTAINER_NAME="rancher-for-kind"
 RANCHER_HTTP_HOST_PORT=$[$[RANDOM%9000]+30000]
 RANCHER_HTTPS_HOST_PORT=$[$[RANDOM%9000]+30000]
 : ${KIND_CLUSTER_NAME:="kind-for-rancher"}
-RANCHER_VERSION=2.6.2
+RANCHER_VERSION=2.6-head
 
 info() {
   if [[ ${QUIET:-0} -eq 0 ]] || [[ ${DEBUG:-0} -eq 1 ]]; then
@@ -156,7 +156,7 @@ if [[ $(docker ps -f name=${RANCHER_CONTAINER_NAME} -q | wc -l) -ne 0 ]]; then
 fi
 info "Launching Rancher container"
 if RANCHER_CONTAINER_ID=$(docker run -d \
-              --privileged \
+	      --privileged \
               --restart=unless-stopped \
               --name ${RANCHER_CONTAINER_NAME}  \
               -p ${RANCHER_HTTP_HOST_PORT}:80   \
