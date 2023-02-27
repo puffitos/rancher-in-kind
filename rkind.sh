@@ -10,7 +10,7 @@ RANCHER_CONTAINER_NAME="rancher-for-kind"
 RANCHER_HTTP_HOST_PORT=$[$[RANDOM%9000]+30000]
 RANCHER_HTTPS_HOST_PORT=$[$[RANDOM%9000]+30000]
 : ${KIND_CLUSTER_NAME:="kind-for-rancher"}
-RANCHER_VERSION=2.6-head
+RANCHER_VERSION=2.7-head
 
 info() {
   if [[ ${QUIET:-0} -eq 0 ]] || [[ ${DEBUG:-0} -eq 1 ]]; then
@@ -72,7 +72,7 @@ case $(uname -s) in
     localip="$(ipconfig getifaddr en0)"
   ;;
   Linux)
-    localip="$(hostname -i)"
+    localip="$(hostname -i | cut -f3 -d' ')"
   ;;
   *)
     echo >&2 "Unsupported OS, exiting.."

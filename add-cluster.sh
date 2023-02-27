@@ -7,8 +7,9 @@
 URL="$1"
 KIND_CLUSTER_NAME="${2:-kind-for-rancher}"
 INIT_PASSWORD=$(docker exec -ti $3 reset-password |grep -v "New password" |sed 's/\r$//')
+echo $INIT_PASSWORD
 sleep 15
-PASSWORD="password"
+PASSWORD="password123415123"
 
 while ! curl -k "https://${URL}/ping"; do sleep 3; done
 
